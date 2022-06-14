@@ -17,7 +17,7 @@ use Ruga\User\UserTableInterface;
  */
 class UserFactory
 {
-    public function __invoke(ContainerInterface $container, string $resolvedName, ?array $options): callable
+    public function __invoke(ContainerInterface $container, string $resolvedName="", ?array $options=[]): callable
     {
         /** @var UserTableInterface $userTable */
 //        $userTable=$container->get(UserTableInterface::class);
