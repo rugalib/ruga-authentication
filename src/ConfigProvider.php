@@ -71,6 +71,29 @@ class ConfigProvider
                 ],
                 */
             ],
+            
+            'templates' => [
+                'paths' => [
+                    'app' => [__DIR__ . '/../templates/app']
+                ]
+            ],
+            
+            /*
+            'router' => [
+                'routes' => [
+                    'login' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/login',
+                            'defaults' => [
+                                'controller' => \Ruga\Authentication\Handler\LoginHandler::class,
+                                ''
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            */
         ];
     }
 }

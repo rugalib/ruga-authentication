@@ -1,0 +1,38 @@
+<div class="login-box">
+
+    <form method="post">
+        <div class="input-group mb-3">
+            <input type="username" name="username" class="form-control" placeholder="Benutzername">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Passwort">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <?php
+                if ($this->error) { ?>
+                    <div class="text-red">
+                        <?= $this->error ?>
+                    </div>
+                <?php
+                } ?>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary btn-block">Anmelden</button>
+            </div>
+            <!-- /.col -->
+        </div>
+    </form>
+    
+</div>
