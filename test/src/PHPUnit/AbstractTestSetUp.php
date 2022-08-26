@@ -42,7 +42,7 @@ abstract class AbstractTestSetUp extends \Ruga\Db\PHPUnit\AbstractTestSetUp
                 new \Ruga\User\ConfigProvider(),
                 new PhpFileProvider(__DIR__ . "/../../config/config.php"),
                 new PhpFileProvider(__DIR__ . "/../../config/config.local.php"),
-            ], null, []
+            ], null, [\Ruga\Authentication\ConfigProcessor::class]
         );
         return $config->getMergedConfig();
     }

@@ -11,7 +11,7 @@ return [
         'driver_options' => [
         ],
         \Ruga\Db\Schema\Updater::class => [
-            \Ruga\Db\Schema\Updater::CONF_REQUESTED_VERSION => 0,
+            \Ruga\Db\Schema\Updater::CONF_REQUESTED_VERSION => 1,
             \Ruga\Db\Schema\Updater::CONF_SCHEMA_DIRECTORY => __DIR__ . '/ruga-dbschema',
         ],
     ],

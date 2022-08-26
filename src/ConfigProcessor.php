@@ -38,7 +38,16 @@ class ConfigProcessor
             $result=$adapter->query($query, Adapter::QUERY_MODE_EXECUTE);
             $roles=[];
             foreach($result as $row) {
-                $roles[$row['client_role']]=array_filter(explode(',', $row['parent_roles'] ?? ''));
+                $parentRoles=array_filter(explode(',', $row['parent_roles'] ?? ''));
+                
+                // Add parent roles if not already defined
+                foreach($parentRoles as $parentRole) {
+                    if(!array_key_exists($parentRole, $roles)) {
+                        $roles[$parentRole]=[];
+                    }
+                }
+                
+                $roles[$row['client_role']]=$parentRoles;
             }
             
             $config['mezzio-authorization-rbac']['roles']=$roles;

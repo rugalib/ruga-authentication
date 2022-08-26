@@ -52,4 +52,27 @@ class UserInterfaceTest extends \Ruga\Authentication\Test\PHPUnit\AbstractTestSe
         $this->assertArrayHasKey('system', $config);
     }
     
+    
+    
+    public function testIsRoleConfigValid(): void
+    {
+        $container = $this->getContainer();
+//        print_r($container->get('config'));
+        $rolesConfig = $container->get('config')['mezzio-authorization-rbac']['roles'];
+        print_r($container->get('config')['mezzio-authorization-rbac']);
+        
+        $knownRoles=[];
+        foreach($rolesConfig as $role => $parentRoles)
+        {
+            // add the current role to the list of known roles
+            $knownRoles[]=$role;
+            // Check if the superior role is already known
+            foreach($parentRoles as $parentRole) {
+                $this->assertContains($parentRole, $knownRoles);
+            }
+        }
+        
+    }
+    
+    
 }
