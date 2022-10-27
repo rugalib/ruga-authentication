@@ -125,10 +125,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
             );
             
             // Store requested url in session for redirection after login
-            $redirectAfterLogin = rtrim($this->urlHelper->getBasePath(), "/\\") . "/" . ltrim(
-                    $this->getRedirectAfterLogin($request, $session),
-                    "/\\"
-                );
+            $redirectAfterLogin = $this->getRedirectAfterLogin($request, $session);
             $session->set(self::REDIRECT_ATTRIBUTE, $redirectAfterLogin);
             \Ruga\Log::addLog("Storing url '{$redirectAfterLogin}' for redirection after successful login");
             

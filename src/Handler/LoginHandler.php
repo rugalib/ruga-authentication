@@ -7,6 +7,7 @@ namespace Ruga\Authentication\Handler;
 use Fig\Http\Message\RequestMethodInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -33,14 +34,18 @@ class LoginHandler implements RequestHandlerInterface
     /** @var AuthenticationInterface */
     private $authAdapter;
     
+    /** @var \Mezzio\Helper\UrlHelper */
+    private $urlHelper;
     
     
     public function __construct(
         TemplateRendererInterface $renderer,
-        AuthenticationInterface $authAdapter
+        AuthenticationInterface $authAdapter,
+        UrlHelper $urlHelper
     ) {
         $this->renderer = $renderer;
         $this->authAdapter = $authAdapter;
+        $this->urlHelper = $urlHelper;
     }
     
     
@@ -85,6 +90,12 @@ class LoginHandler implements RequestHandlerInterface
         // Login was successful
         if ($this->authAdapter->authenticate($request)) {
             $session->unset(self::REDIRECT_ATTRIBUTE);
+            // Expand after-login-destination to real path
+            $redirectAfterLogin = rtrim($this->urlHelper->getBasePath(), "/\\") . "/" .
+                ltrim(
+                    $redirectAfterLogin,
+                    "/\\"
+                );
             return new RedirectResponse($redirectAfterLogin);
         }
         
