@@ -86,4 +86,23 @@ final class User implements \Ruga\Authentication\UserInterface
         return $this->getRow()->toArray() ?? [];
     }
     
+    
+    
+    /**
+     * Check if the user has the given role.
+     *
+     * @param string|RoleInterface $role
+     *
+     * @return bool
+     */
+    public function hasRole($role): bool
+    {
+        // This try-catch is here as a workaround for Issue #17 in rugalib/ruga-db-user
+        try {
+            return $this->getRow()->hasRole($role);
+        } catch (\Throwable $e) {
+            return false;
+        }
+    }
+    
 }

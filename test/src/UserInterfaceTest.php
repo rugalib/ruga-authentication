@@ -44,6 +44,21 @@ class UserInterfaceTest extends \Ruga\Authentication\Test\PHPUnit\AbstractTestSe
     
     
     
+    public function testCanCheckUserRoles(): void
+    {
+        $container = $this->getContainer();
+        /** @var \Ruga\Authentication\UserInterface $user */
+        $user = $container->get(\Ruga\Authentication\UserInterface::class)('admin');
+        $this->assertInstanceOf(\Ruga\Authentication\User::class, $user);
+        echo $user->getIdentity() . PHP_EOL;
+        $this->assertTrue($user->hasRole('admin'));
+        $this->assertTrue($user->hasRole('user'));
+        $this->assertFalse($user->hasRole('usr'));
+        $this->assertFalse($user->hasRole('system'));
+    }
+    
+    
+    
     public function testCanGetRoleConfig(): void
     {
         $container = $this->getContainer();
