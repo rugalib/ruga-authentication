@@ -24,7 +24,7 @@
     "rugalib/ruga-log": "^1.0",
     "rugalib/ruga-std": "^1.0",
     "rugalib/ruga-db": "^1.0",
-    "rugalib/ruga-db-user": "^1.0"
+    "rugalib/ruga-db-user": "^1.2.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^9",
